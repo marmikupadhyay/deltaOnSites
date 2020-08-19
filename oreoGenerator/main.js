@@ -47,6 +47,9 @@ document.getElementById("input-form").addEventListener("submit", event => {
   var oreoArr = [];
   var flag = 0;
   s = s.toUpperCase();
+  if (s === "") {
+    flag = 1;
+  }
   for (var i = 0; i < s.length; i++) {
     if (!(s[i] === "O" || s[i] === "R" || s[i] === "E" || s[i] === "&")) {
       flag = 1;

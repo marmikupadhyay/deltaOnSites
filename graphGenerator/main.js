@@ -9,6 +9,7 @@ document.getElementById("input-form").addEventListener("submit", e => {
   plot();
 });
 
+//Function to draw
 const draw = () => {
   if (null == canvas || !canvas.getContext) return;
 
@@ -58,6 +59,7 @@ const showAxes = (ctx, axes) => {
   );
 };
 
+// Function to plot the graph
 const plot = () => {
   ctx.clearRect(0, 0, width, height);
   draw();

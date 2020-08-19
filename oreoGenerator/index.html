@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OREO MAKER</title>
+    <link rel="stylesheet" href="./main.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section class="main-body">
+      <div class="col-4 left-side">
+        <div class="wrapper" id="shadow">
+          <div class="heading">
+            <h1 class="title">Oreo Generator</h1>
+          </div>
+          <div class="form-container">
+            <form id="input-form">
+              <div class="form-group">
+                <label for="oreostr">Enter the oreo String Here</label>
+                <input
+                  id="oreostr"
+                  type="text"
+                  name="oreostr"
+                  placeholder="OREO"
+                  value=""
+                  class="inputField"
+                />
+              </div>
+              <button id="subbtn" class="btn">OREO-IFY</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-8 right-side">
+        <div class="heading">
+          <h1 class="title text-black">Generated Oreos</h1>
+        </div>
+        <div class="card-area"></div>
+      </div>
+    </section>
+    <script src="./main.js"></script>
+  </body>
+</html>

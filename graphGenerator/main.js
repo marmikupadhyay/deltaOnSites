@@ -16,9 +16,7 @@ const draw = () => {
   var axes = {};
   axes.x = 0.5 + 0.5 * canvas.width;
   axes.y = 0.5 + 0.5 * canvas.height;
-  axes.scale = 40;
   axes.drawneg = true;
-
   showAxes(ctx, axes);
 };
 
@@ -36,6 +34,8 @@ const showAxes = (ctx, axes) => {
   ctx.moveTo(x, 0);
   ctx.lineTo(x, h); // Y axis
   ctx.stroke();
+
+  //Filling the quadrant text
   ctx.font = "10px Lato";
   ctx.fillText(
     "I Quadrant",
@@ -66,30 +66,27 @@ const plot = () => {
   ctx.save();
   ctx.translate(width / 2, height / 2);
 
-  let scope = {
-    x: -width / 2
-  };
-  const node = math.parse(input.value, scope);
-  const code = node.compile();
-  code.eval(scope);
+  let scope = { x: -width / 2 };
+
+  //get a function evaluateY that returns the value for the input equation
+  const node = math.parse(input.value);
+  const code = node.compile(scope);
+  const evaluateY = code.eval;
 
   ctx.beginPath();
 
-  var firstEnter = true;
   var scale = document.getElementById("scale").value;
 
-  for (var i = -width / 2; i <= width / 2; i = i + 0.06) {
-    scope.x = i;
+  //Move to the initial position
+  ctx.moveTo((-width / 2) * scale, scale * -1 * evaluateY(scope));
 
-    if (firstEnter == true) {
-      firstEnter = false;
-      ctx.moveTo(i * scale, scale * -1 * code.eval(scope));
-    } else {
-      ctx.lineTo(scale * i, -1 * scale * code.eval(scope));
-      ctx.strokeStyle = "#1b1b2f";
-      ctx.lineWidth = 0.1;
-      ctx.stroke();
-    }
+  //For loop to draw the graph pixel by pixel
+  for (var i = -width / 2 + 0.06; i <= width / 2; i = i + 0.06) {
+    scope.x = i;
+    ctx.lineTo(scale * i, -1 * scale * evaluateY(scope));
+    ctx.strokeStyle = "#1b1b2f";
+    ctx.lineWidth = 0.1;
+    ctx.stroke();
   }
   ctx.restore();
 };

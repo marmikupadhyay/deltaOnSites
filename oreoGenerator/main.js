@@ -7,7 +7,7 @@ function generateOreo(arr) {
   for (var i = 0; i < arr.length; i++) {
     if (i == arr.length - 1 && arr[i] === "O") {
       cardBody.innerHTML += `<img
-                src="/imgs/oreobottom.png"
+                src="./imgs/oreobottom.png"
                 class="oreo-bottom"
                 alt="bottom"
                 style="z-index:${arr.length - i}"
@@ -15,12 +15,12 @@ function generateOreo(arr) {
               />`;
     } else if (arr[i] === "O") {
       if (biscuitCount % 2 == 0) {
-        cardBody.innerHTML += `<img src="/imgs/oreotop.png" class="oreo-top" alt="top" style="z-index:${
+        cardBody.innerHTML += `<img src="./imgs/oreotop.png" class="oreo-top" alt="top" style="z-index:${
           arr.length - i
         }" draggable="false"/>`;
       } else {
         cardBody.innerHTML += `<img
-                src="/imgs/oreobottom.png"
+                src="./imgs/oreobottom.png"
                 class="oreo-bottom"
                 alt="bottom"
                 style="z-index:${arr.length - i}"
@@ -29,7 +29,7 @@ function generateOreo(arr) {
       }
       biscuitCount++;
     } else if (arr[i] === "RE") {
-      cardBody.innerHTML += `<img src="/imgs/oreocream.png" class="oreo-cream" alt="cream"  style="z-index:${
+      cardBody.innerHTML += `<img src="./imgs/oreocream.png" class="oreo-cream" alt="cream"  style="z-index:${
         arr.length - i
       }" draggable="false"/>`;
     } else if (arr[i] === "&") {

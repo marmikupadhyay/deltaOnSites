@@ -3,6 +3,7 @@ var ctx = canvas.getContext("2d");
 var input = document.getElementById("eqn");
 var width = canvas.width;
 var height = canvas.height;
+var flag;
 
 document.getElementById("input-form").addEventListener("submit", e => {
   e.preventDefault();
@@ -61,6 +62,19 @@ const showAxes = (ctx, axes) => {
 
 // Function to plot the graph
 const plot = () => {
+  //get a function evaluateY that returns the value for the input equation
+  const node = math.parse(input.value);
+  console.log(node);
+  if (node.hasOwnProperty("fn") || node.hasOwnProperty("value")) {
+    flag = 1;
+  } else {
+    flag = 0;
+  }
+  if (!flag) {
+    window.alert("Enter Proper Input");
+    return;
+  }
+
   ctx.clearRect(0, 0, width, height);
   draw();
   ctx.save();
@@ -68,8 +82,6 @@ const plot = () => {
 
   let scope = { x: -width / 2 };
 
-  //get a function evaluateY that returns the value for the input equation
-  const node = math.parse(input.value);
   const code = node.compile(scope);
   const evaluateY = code.eval;
 

@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="/css/main.css" />
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+<section class="main-body">
+  <div class="col-4 left-side">
+    <div class="wrapper" id="shadow">
+      <div class="heading">
+        <h1 class="title">Spotify Artists</h1>
+      </div>
+
+      <div class="form-container">
+        <form id="input-form" method="POST" action="/">
+          <div class="form-group">
+            <label for="eqn">Enter Artist One here</label>
+            <input id="one" type="text" name="artone" class="inputField" />
+          </div>
+          <div class="form-group">
+            <label for="scale">
+              Enter Artist two here
+            </label>
+            <input id="two" type="text" name="arttwo" class="inputField" />
+          </div>
+          <input type="text" name="token" class="hidden" id="tokenInput" />
+          <button id="subbtn" class="btn">Find</button>
+        </form>
+      </div>
+      <p class="info">
+          Please be Patient with the requests as it takes a few seconds to search
+          <br><br>
+          The Paths maybe diffrent but the length will always be minimum
+      </p>
+    </div>
+  </div>
+
+  <div class="col-8 right-side">
+    <div class="heading2">
+      <h1 class="title">The Relations : <% count>0? count-1:"" %></h1>
+    </div>
+    <div class="card-area">
+      <% patharr2.forEach((artist,i)=>{ %>
+        <% if(i<patharr2.length-1)  { %>
+      <div class="bigger-card">
+        <div class="artist-card">
+          <div class="card-body">
+            <img src="<%= artist.images[0].url %>" alt="" class="card-img" />
+          </div>
+          <h1 class="card-title"><%= artist.name %></h1>
+        </div>
+        <div class="artist-card indicator">
+          <div class="card-body"></div>
+          <h1 class="card-title">
+            is related to =>
+          </h1>
+        </div>
+        <div class="artist-card">
+          <div class="card-body">
+            <img src="<%= patharr2[i+1].images[0].url %>" alt="" class="card-img" />
+          </div>
+          <h1 class="card-title"><%= patharr2[i+1].name %></h1>
+        </div>
+      </div>
+        <% } %>
+        <% }) %>
+        <h1 class="error">
+            <%= error %>
+        </h1>
+    </div>
+  </div>
+</section>

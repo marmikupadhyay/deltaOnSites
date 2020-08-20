@@ -5,6 +5,10 @@
   font-family: "Lato";
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .col-4 {
   width: 25%;
   display: flex;
@@ -113,9 +117,6 @@ label {
   width: 259.5px;
   border: 2px solid black;
   position: absolute;
-  cursor: move;
-  /* resize: both;
-  overflow: auto;*/
 }
 
 .card-body {
@@ -129,6 +130,13 @@ label {
 .card-body img {
   user-select: none;
 }
+
+.info {
+  font-size: 1.2em;
+  color: white;
+  margin-top: 1rem;
+}
+
 /* OREOSSSSSSSSSSSS ############# */
 
 .oreo-top {
@@ -155,10 +163,32 @@ label {
 .card-title {
   font-size: 1.5em;
   padding: 0.5rem;
-  border-top: 1px solid black;
+  border-bottom: 2px solid black;
   background: #c9384f;
   color: white;
   cursor: move;
+}
+
+.resize-box {
+  width: 100%;
+  padding: 10px 5px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.increase,
+.decrease {
+  font-size: 1em;
+  padding: 10px 10px;
+  color: white;
+  border: none;
+}
+
+.increase {
+  background: rgb(5, 201, 14);
+}
+.decrease {
+  background: rgb(230, 54, 48);
 }
 
 @media only screen and (max-width: 780px) {

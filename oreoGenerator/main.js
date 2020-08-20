@@ -1,6 +1,11 @@
 function generateOreo(arr) {
   var card = document.createElement("div");
   card.className = "oreo-card";
+  card.id = `${arr.join("")}${Math.random(10)}`;
+  card.innerHTML += `<h1 class="card-title" id="${card.id}header">${arr.join(
+    ""
+  )} </h1>`;
+  card.style.transform = "scale(1.0)";
   var cardBody = document.createElement("div");
   cardBody.className = "card-body";
   var biscuitCount = 0;
@@ -37,10 +42,11 @@ function generateOreo(arr) {
     }
   }
   card.appendChild(cardBody);
-  card.id = `${arr.join("")}${Math.random(10)}`;
-  card.innerHTML += `<h1 class="card-title" id="${card.id}header">${arr.join(
-    ""
-  )}</h1>`;
+  card.innerHTML += `
+    <div class="resize-box">
+      <button class="increase" onclick="incSize(event)">Increase</button>
+      <button class="decrease" onclick="decSize(event)">Decrease</button>
+    </div>`;
   document.querySelector(".card-area").appendChild(card);
   addDrag();
 }
@@ -50,6 +56,26 @@ function addDrag() {
   oreos.forEach(oreo => {
     dragElement(oreo);
   });
+}
+
+function incSize(event) {
+  var curscale = event.target.parentElement.parentElement.style.transform;
+  var curscaleno = curscale[6] + curscale[7] + curscale[8];
+  if (curscale[7] === ")") {
+    curscaleno = curscale[6];
+  }
+  var newScale = Number(curscaleno) + 0.1;
+  event.target.parentElement.parentElement.style.transform = `scale(${newScale})`;
+}
+
+function decSize(event) {
+  var curscale = event.target.parentElement.parentElement.style.transform;
+  var curscaleno = curscale[6] + curscale[7] + curscale[8];
+  if (curscale[7] === ")") {
+    curscaleno = curscale[6];
+  }
+  var newScale = Number(curscaleno) - 0.1;
+  event.target.parentElement.parentElement.style.transform = `scale(${newScale})`;
 }
 
 document.getElementById("input-form").addEventListener("submit", event => {
@@ -90,7 +116,7 @@ function dragElement(elmnt) {
     pos3 = 0,
     pos4 = 0;
 
-  document.getElementById(elmnt.id).onmousedown = dragMouseDown;
+  document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
 
   function dragMouseDown(e) {
     e = e || window.event;

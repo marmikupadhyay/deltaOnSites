@@ -37,8 +37,19 @@ function generateOreo(arr) {
     }
   }
   card.appendChild(cardBody);
-  card.innerHTML += `<h1 class="card-title">${arr.join("")}</h1>`;
+  card.id = `${arr.join("")}${Math.random(10)}`;
+  card.innerHTML += `<h1 class="card-title" id="${card.id}header">${arr.join(
+    ""
+  )}</h1>`;
   document.querySelector(".card-area").appendChild(card);
+  addDrag();
+}
+
+function addDrag() {
+  var oreos = document.querySelectorAll(".oreo-card");
+  oreos.forEach(oreo => {
+    dragElement(oreo);
+  });
 }
 
 document.getElementById("input-form").addEventListener("submit", event => {
@@ -72,3 +83,42 @@ document.getElementById("input-form").addEventListener("submit", event => {
     window.alert("Enter Valid OREO Input");
   }
 });
+
+function dragElement(elmnt) {
+  var pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+
+  document.getElementById(elmnt.id).onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+    elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
